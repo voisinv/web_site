@@ -1,0 +1,18 @@
+{
+    "dev": {
+        "base" : "dev/",
+        "scripts": "dev/scripts/",
+        "assets": "dev/assets/",
+        "styles": "dev/styles/",
+        "partials": "dev/partials/",
+        "index"  : "dev/index.jade"
+    },
+
+    "app" : {
+        "scripts" : "app/scripts/",
+        "assets" : "dev/assests/",
+        "partials": "dev/partials/",
+        "index" : "app/index.html"
+    }
+
+}

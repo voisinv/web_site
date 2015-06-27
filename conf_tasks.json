@@ -1,0 +1,151 @@
+{
+  "pkg": "grunt.file.readJSON(\"package.json\")",
+
+  "watch": {
+    "all": {
+      "files": [
+        "Gruntfile.coffee",
+        "conf_tasks.json",
+        "dev/*.*",
+        "dev/**\/{,*\/}*.*"
+      ],
+      "tasks": [
+        "jade:html",
+        "jade:base_path",
+        "wiredep",
+        "copy:main",
+        "coffeelint:app",
+        "coffee",
+        "jshint:all",
+        "fileblocks"
+      ]
+    },
+    "karma": {
+        "files": ["./dev/{,*\/}*.*", ".tests/units/{,*\/}*.*"],
+        "tasks": ["karma"]
+    },
+    "protractor": {
+        "files": ["./dev/{,*\/}*.*", ".tests/e2e/{,*\/}*.*"],
+        "tasks": ["protractor"]
+    },
+    "options": {
+      "livereload": "<%= connect.options.livereload %>",
+      "reload": false,
+      "debounceDelay": 10,
+      "event": ["changed", "added", "deleted"],
+      "atBegin": true
+    }
+  },
+  "wiredep": {
+    "task": {
+      "src": "app/index.html"
+    }
+  },
+
+  "jade": {
+    "html": {
+      "files": {
+        "./app/": "./dev/index.jade"
+      },
+      "options": {
+        "pretty": true,
+        "client": false,
+        "wrap": false,
+        "compileDebug": true
+      }
+    },
+    "base_path": {
+      "files": {
+        "app/partials/": ["dev/partials/{,*\/}*.jade"]
+      },
+      "options": {
+        "pretty": true,
+        "client": false,
+        "compileDebug": true,
+        "basePath": "./dev/partials/"
+      }
+    }
+  },
+  "copy": {
+    "main": {
+      "files": [
+        {
+          "expand": true,
+          "cwd": "dev/assets/",
+          "src": ["**", "**\/*.*"],
+          "dest": "app/assets/"
+        },
+        {
+          "expand": true,
+          "cwd": "dev/styles/",
+          "src": ["{,*\/}*.css"],
+          "dest": "app/styles/"
+        }
+      ]
+    }
+  },
+  "coffeelint": {
+    "app": [ "Gruntfile.coffee", "dev/scripts/{,*\/}*.coffee"],
+    "options": {
+      "configFile": "coffeelint.json"
+    }
+  },
+  "jshint":  {
+    "all": ["app/scripts/app.js", "app/scripts/{,*\/}*.js"]
+  },
+  "coffee": {
+    "glob_to_multiple": {
+      "expand": true,
+      "bare": true,
+      "flatten": false,
+      "cwd": "dev/scripts",
+      "src": "{,*\/}*.coffee",
+      "dest": "app/scripts/",
+      "ext": ".js"
+    }
+  },
+
+
+  "connect": {
+    "options": {
+      "hostname": "localhost",
+      "livereload": 35729,
+      "port": 9000
+    },
+    "server": {
+      "options": {
+        "base": ["./app", "./"],
+        "open": true
+      }
+    }
+  },
+  "fileblocks": {
+    "todos": {
+      "src": "./app/index.html",
+      "blocks": {
+        "app": {
+          "src":"app/scripts/{,*\/}*.js"
+        },
+        "styles" : {
+            "src" : "app/styles/{,*\/}*.css"
+        }
+      }
+    }
+  },
+  "karma": {
+    "unit": {
+      "configFile": "karma.conf.coffee"
+    }
+  },
+    "protractor": {
+        "options": {
+            "configFile": "e2e.conf.js",
+            "keepAlive": true,
+            "noColor": false
+        },
+        "e2e": {
+
+
+        }
+    }
+}

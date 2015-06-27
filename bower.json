@@ -1,0 +1,22 @@
+{
+  "name": "lot2",
+  "version": "0.0.0",
+  "authors": [
+    "vincent.voisin"
+  ],
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "homepage": "vincentvoisin.com",
+  "ignore": [
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "angular": "~1.3.13",
+    "angular-route": "~1.3.13",
+    "underscore": "~1.8.2",
+    "d3": "~3.5.5"
+  }
+}
